@@ -52,3 +52,12 @@ maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
 specificationVersion: '0.19'
+common:
+  - name: Docs MCP Server | grounded.tools
+    description: 'null'
+    url: https://grounded.tools/
+    type: Website
+  - name: Docs MCP Server | grounded.tools
+    description: 'null'
+    url: https://grounded.tools/#features
+    type: Features
