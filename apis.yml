@@ -5,7 +5,10 @@ apis:
   - aid: grounded-tools:grounded-tools
     name: grounded.tools
     tags:
-      - API
+      - Experience
+      - Documentation
+      - Developer Tools
+      - Developers
     humanURL: ' https://grounded.tools/'
     properties:
       - url: ' https://grounded.tools/'
