@@ -18,6 +18,16 @@ apis:
       - url: >-
           openapi/grounded-tools-docs-mcp-server-openapi.yml
         type: OpenAPI
+      - url: json-schema/library.json
+        type: JSONSchema
+      - url: json-schema/version.json
+        type: JSONSchema
+      - url: json-schema/job.json
+        type: JSONSchema
+      - url: json-schema/search-result.json
+        type: JSONSchema
+      - url: json-ld/grounded-tools-context.jsonld
+        type: JSONLD
     description: >-
       Index 3rd party documentation from websites, GitHub, npm, PyPI, and local
       files. Provide your AI with version-aware search tools via the Model

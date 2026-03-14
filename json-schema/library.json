@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/grounded-tools/blob/main/json-schema/library.json",
+  "title": "grounded.tools Library",
+  "description": "An indexed documentation library representing a software package or framework whose documentation has been scraped and stored for AI-assisted search.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Library name used to identify the documentation source."
+    },
+    "versions": {
+      "type": "array",
+      "items": {
+        "$ref": "version.json"
+      },
+      "description": "A list of indexed versions available for this library."
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

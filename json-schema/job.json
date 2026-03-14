@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/grounded-tools/blob/main/json-schema/job.json",
+  "title": "grounded.tools Job",
+  "description": "An indexing pipeline job that tracks the progress and status of a documentation scraping operation.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique job identifier."
+    },
+    "library": {
+      "type": "string",
+      "description": "Library name being indexed."
+    },
+    "version": {
+      "type": "string",
+      "nullable": true,
+      "description": "Library version being indexed."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "queued",
+        "running",
+        "completed",
+        "failed",
+        "cancelling",
+        "cancelled"
+      ],
+      "description": "Current job status."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the job was created."
+    },
+    "startedAt": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true,
+      "description": "Timestamp when the job started processing."
+    },
+    "finishedAt": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true,
+      "description": "Timestamp when the job completed."
+    },
+    "error": {
+      "type": "string",
+      "nullable": true,
+      "description": "Error message if the job failed."
+    },
+    "progress": {
+      "type": "object",
+      "description": "Progress information for the job.",
+      "properties": {
+        "pages": {
+          "type": "integer",
+          "description": "Number of pages processed so far."
+        },
+        "totalPages": {
+          "type": "integer",
+          "description": "Total pages to process."
+        },
+        "totalDiscovered": {
+          "type": "integer",
+          "description": "Total pages discovered during crawling."
+        }
+      }
+    }
+  },
+  "required": [
+    "id",
+    "library",
+    "status",
+    "createdAt"
+  ]
+}

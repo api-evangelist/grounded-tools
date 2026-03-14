@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/grounded-tools/blob/main/json-schema/search-result.json",
+  "title": "grounded.tools Search Result",
+  "description": "A single documentation search result returned by the search_docs tool, containing a matching document's URL and relevant content.",
+  "type": "object",
+  "properties": {
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the matching document."
+    },
+    "content": {
+      "type": "string",
+      "description": "Matching content from the document in Markdown format."
+    }
+  },
+  "required": [
+    "url",
+    "content"
+  ]
+}

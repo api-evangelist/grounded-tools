@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/grounded-tools/blob/main/json-schema/version.json",
+  "title": "grounded.tools Version",
+  "description": "A specific indexed version of a library's documentation, including metadata about the indexing process and document counts.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Version string. Supports full semver (1.2.3), pre-release (1.2.3-beta.1), or partial (1, 1.2)."
+    },
+    "documentCount": {
+      "type": "integer",
+      "description": "Number of indexed documents for this version."
+    },
+    "uniqueUrlCount": {
+      "type": "integer",
+      "description": "Number of unique URLs indexed for this version."
+    },
+    "indexedAt": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true,
+      "description": "Timestamp when the version was indexed."
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the version in the store."
+    },
+    "sourceUrl": {
+      "type": "string",
+      "format": "uri",
+      "nullable": true,
+      "description": "Original source URL used for scraping this version's documentation."
+    }
+  },
+  "required": [
+    "version"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "grounded": "https://grounded.tools/",
+    "Library": {
+      "@id": "grounded:library",
+      "@context": {
+        "name": "https://schema.org/name",
+        "versions": "https://schema.org/hasPart"
+      }
+    },
+    "Version": {
+      "@id": "grounded:version",
+      "@context": {
+        "version": "https://schema.org/softwareVersion",
+        "documentCount": "https://schema.org/numberOfItems",
+        "uniqueUrlCount": "https://schema.org/numberOfItems",
+        "indexedAt": "https://schema.org/dateCreated",
+        "status": "https://schema.org/status",
+        "sourceUrl": "https://schema.org/url"
+      }
+    },
+    "Job": {
+      "@id": "grounded:job",
+      "@context": {
+        "id": "https://schema.org/identifier",
+        "library": "https://schema.org/name",
+        "version": "https://schema.org/softwareVersion",
+        "status": "https://schema.org/status",
+        "createdAt": "https://schema.org/dateCreated",
+        "startedAt": "https://schema.org/startTime",
+        "finishedAt": "https://schema.org/endTime",
+        "error": "https://schema.org/error",
+        "progress": "https://schema.org/MonitorAction"
+      }
+    },
+    "SearchResult": {
+      "@id": "grounded:search-result",
+      "@context": {
+        "url": "https://schema.org/url",
+        "content": "https://schema.org/text"
+      }
+    }
+  }
+}
