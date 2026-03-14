@@ -1,0 +1,439 @@
+openapi: 3.1.0
+info:
+  title: grounded.tools Docs MCP Server API
+  description: >-
+    The grounded.tools Docs MCP Server is an open-source, privacy-first
+    documentation indexing tool that keeps AI assistants informed with
+    up-to-date, version-specific documentation. It indexes documentation from
+    websites, GitHub repositories, npm, PyPI, and local files, then provides AI
+    assistants with version-aware search capabilities via the Model Context
+    Protocol (MCP). The server exposes MCP tools over Server-Sent Events (SSE)
+    and streamable HTTP, along with a web management UI for documentation
+    management. MCP tools include scrape_docs, search_docs, fetch_url,
+    list_libraries, find_version, list_jobs, get_job_info, cancel_job,
+    remove_docs, and refresh_version.
+  version: 0.1.0
+  contact:
+    name: Andre Rabold
+    url: https://github.com/arabold/docs-mcp-server
+  license:
+    name: MIT
+    url: https://github.com/arabold/docs-mcp-server/blob/main/LICENSE
+servers:
+  - url: http://localhost:6280
+    description: Local development server (default port)
+paths:
+  /sse:
+    get:
+      operationId: connectMcpSse
+      summary: Connect to MCP server via Server-Sent Events
+      description: >-
+        Establishes a Server-Sent Events (SSE) connection to the MCP server.
+        This is the primary endpoint for MCP client connections. The server
+        streams MCP protocol messages including tool results, resource data, and
+        notifications over this persistent connection.
+      tags:
+        - MCP Transport
+      responses:
+        '200':
+          description: SSE stream established successfully.
+          content:
+            text/event-stream:
+              schema:
+                type: string
+                description: Server-Sent Events stream carrying MCP protocol messages.
+  /mcp:
+    post:
+      operationId: sendMcpMessage
+      summary: Send MCP message via streamable HTTP
+      description: >-
+        Send a JSON-RPC 2.0 message to the MCP server over streamable HTTP.
+        This is an alternative transport to SSE for MCP client connections.
+        Supports all MCP protocol operations including tool invocations
+        (scrape_docs, search_docs, fetch_url, list_libraries, find_version,
+        list_jobs, get_job_info, cancel_job, remove_docs, refresh_version)
+        and resource access.
+      tags:
+        - MCP Transport
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JsonRpcRequest'
+      responses:
+        '200':
+          description: MCP response returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonRpcResponse'
+  /:
+    get:
+      operationId: getWebUi
+      summary: Web management UI
+      description: >-
+        Serves the web-based management UI for managing documentation sources,
+        viewing indexed libraries, monitoring scraping jobs, and searching
+        documentation.
+      tags:
+        - Web UI
+      responses:
+        '200':
+          description: HTML page for the web management UI.
+          content:
+            text/html:
+              schema:
+                type: string
+components:
+  schemas:
+    JsonRpcRequest:
+      type: object
+      description: JSON-RPC 2.0 request message for MCP protocol communication.
+      required:
+        - jsonrpc
+        - method
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+            - '2.0'
+          description: JSON-RPC protocol version.
+        id:
+          oneOf:
+            - type: string
+            - type: integer
+          description: Request identifier for matching responses.
+        method:
+          type: string
+          description: >-
+            The MCP method to invoke. For tool calls use tools/call. For
+            resource access use resources/read.
+          examples:
+            - tools/call
+            - tools/list
+            - resources/read
+            - resources/list
+        params:
+          type: object
+          description: Method-specific parameters.
+          properties:
+            name:
+              type: string
+              description: >-
+                The tool name when method is tools/call. Available tools are
+                scrape_docs, search_docs, fetch_url, list_libraries,
+                find_version, list_jobs, get_job_info, cancel_job, remove_docs,
+                and refresh_version.
+            arguments:
+              type: object
+              description: Tool-specific arguments.
+    JsonRpcResponse:
+      type: object
+      description: JSON-RPC 2.0 response message.
+      required:
+        - jsonrpc
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+            - '2.0'
+        id:
+          oneOf:
+            - type: string
+            - type: integer
+          description: Matching request identifier.
+        result:
+          type: object
+          description: Successful result payload.
+        error:
+          type: object
+          description: Error details if the request failed.
+          properties:
+            code:
+              type: integer
+            message:
+              type: string
+            data:
+              type: object
+    ScrapeDocsParams:
+      type: object
+      description: Parameters for the scrape_docs MCP tool.
+      required:
+        - url
+        - library
+      properties:
+        url:
+          type: string
+          format: uri
+          description: Documentation root URL to scrape.
+        library:
+          type: string
+          description: Library name.
+        version:
+          type: string
+          description: Library version (optional). Supports full semver (1.2.3), pre-release (1.2.3-beta.1), or partial (1, 1.2).
+        maxPages:
+          type: integer
+          description: Maximum number of pages to scrape. Default is 100.
+          default: 100
+        maxDepth:
+          type: integer
+          description: Maximum navigation depth. Default is 3.
+          default: 3
+        scope:
+          type: string
+          enum:
+            - subpages
+            - hostname
+            - domain
+          description: >-
+            Crawling boundary relative to the starting URL. subpages only crawls
+            within the same path, hostname crawls any path on the same host,
+            domain includes subdomains.
+          default: subpages
+        followRedirects:
+          type: boolean
+          description: Follow HTTP redirects (3xx responses).
+          default: true
+    SearchDocsParams:
+      type: object
+      description: Parameters for the search_docs MCP tool.
+      required:
+        - library
+        - query
+      properties:
+        library:
+          type: string
+          description: Library name.
+        version:
+          type: string
+          description: >-
+            Library version (exact or X-Range pattern, optional). Examples
+            include 18.0.0, 5.x, 5.2.x. Omit to search latest version.
+        query:
+          type: string
+          description: Documentation search query.
+        limit:
+          type: integer
+          description: Maximum number of results to return.
+          default: 5
+          minimum: 1
+          maximum: 100
+    FetchUrlParams:
+      type: object
+      description: Parameters for the fetch_url MCP tool.
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL to fetch and convert to Markdown.
+        followRedirects:
+          type: boolean
+          description: Follow HTTP redirects (3xx responses).
+          default: true
+    ListLibrariesResult:
+      type: object
+      description: Result from the list_libraries MCP tool.
+      properties:
+        libraries:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryInfo'
+    LibraryInfo:
+      type: object
+      description: Information about an indexed library.
+      properties:
+        name:
+          type: string
+          description: Library name.
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/VersionInfo'
+    VersionInfo:
+      type: object
+      description: Information about a specific indexed version.
+      properties:
+        version:
+          type: string
+          description: Version string.
+        documentCount:
+          type: integer
+          description: Number of indexed documents.
+        uniqueUrlCount:
+          type: integer
+          description: Number of unique URLs indexed.
+        indexedAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: Timestamp when the version was indexed.
+        status:
+          type: string
+          description: Current status of the version in the store.
+        sourceUrl:
+          type: string
+          nullable: true
+          description: Original source URL used for scraping.
+    FindVersionParams:
+      type: object
+      description: Parameters for the find_version MCP tool.
+      required:
+        - library
+      properties:
+        library:
+          type: string
+          description: Library name.
+        targetVersion:
+          type: string
+          description: Version pattern to match (exact or X-Range, optional).
+    FindVersionResult:
+      type: object
+      description: Result from the find_version MCP tool.
+      properties:
+        bestMatch:
+          type: string
+          nullable: true
+          description: Best matching version found or null if none.
+        hasUnversioned:
+          type: boolean
+          description: Whether unversioned documentation exists.
+        message:
+          type: string
+          description: Human-readable message about the result.
+    ListJobsParams:
+      type: object
+      description: Parameters for the list_jobs MCP tool.
+      properties:
+        status:
+          type: string
+          enum:
+            - queued
+            - running
+            - completed
+            - failed
+            - cancelling
+            - cancelled
+          description: Filter jobs by status (optional).
+    JobInfo:
+      type: object
+      description: Information about an indexing pipeline job.
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique job identifier.
+        library:
+          type: string
+          description: Library name being indexed.
+        version:
+          type: string
+          nullable: true
+          description: Library version being indexed.
+        status:
+          type: string
+          enum:
+            - queued
+            - running
+            - completed
+            - failed
+            - cancelling
+            - cancelled
+          description: Current job status.
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the job was created.
+        startedAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: Timestamp when the job started processing.
+        finishedAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: Timestamp when the job completed.
+        error:
+          type: string
+          nullable: true
+          description: Error message if the job failed.
+        progress:
+          type: object
+          description: Progress information for the job.
+          properties:
+            pages:
+              type: integer
+              description: Number of pages processed so far.
+            totalPages:
+              type: integer
+              description: Total pages to process.
+            totalDiscovered:
+              type: integer
+              description: Total pages discovered during crawling.
+    GetJobInfoParams:
+      type: object
+      description: Parameters for the get_job_info MCP tool.
+      required:
+        - jobId
+      properties:
+        jobId:
+          type: string
+          format: uuid
+          description: Job ID to query.
+    CancelJobParams:
+      type: object
+      description: Parameters for the cancel_job MCP tool.
+      required:
+        - jobId
+      properties:
+        jobId:
+          type: string
+          format: uuid
+          description: Job ID to cancel.
+    RemoveDocsParams:
+      type: object
+      description: Parameters for the remove_docs MCP tool.
+      required:
+        - library
+      properties:
+        library:
+          type: string
+          description: Library name.
+        version:
+          type: string
+          description: Library version (optional, removes latest if omitted).
+    RefreshVersionParams:
+      type: object
+      description: Parameters for the refresh_version MCP tool.
+      required:
+        - library
+      properties:
+        library:
+          type: string
+          description: Library name.
+        version:
+          type: string
+          description: Library version (optional, refreshes latest if omitted).
+    SearchResult:
+      type: object
+      description: A single documentation search result.
+      properties:
+        url:
+          type: string
+          description: URL of the matching document.
+        content:
+          type: string
+          description: Matching content from the document in Markdown format.
+tags:
+  - name: MCP Transport
+    description: >-
+      Model Context Protocol transport endpoints for connecting AI assistants.
+      Supports SSE and streamable HTTP transports.
+  - name: Web UI
+    description: >-
+      Web-based management interface for documentation sources, library
+      browsing, job monitoring, and search.

@@ -13,10 +13,15 @@ apis:
     properties:
       - url: ' https://grounded.tools/'
         type: Documentation
+      - url: https://github.com/arabold/docs-mcp-server
+        type: GitHubRepository
+      - url: >-
+          openapi/grounded-tools-docs-mcp-server-openapi.yml
+        type: OpenAPI
     description: >-
       Index 3rd party documentation from websites, GitHub, npm, PyPI, and local
       files. Provide your AI with version-aware search tools via the Model
-      Context Protocol. 
+      Context Protocol.
 name: grounded.tools
 tags:
   - Experience
@@ -27,7 +32,7 @@ type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2026-01-02'
-modified: '2026-01-04'
+modified: '2026-03-14'
 position: Consuming
 description: >-
   Grounded.tools (Grounded Docs MCP Server) is an open-source, privacy-first
