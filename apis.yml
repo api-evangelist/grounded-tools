@@ -5,10 +5,10 @@ apis:
   - aid: grounded-tools:grounded-tools
     name: Grounded.tools
     tags:
-      - Experience
-      - Documentation
       - Developer Tools
       - Developers
+      - Documentation
+      - Experience
     humanURL: ' https://grounded.tools/'
     properties:
       - url: ' https://grounded.tools/'
@@ -34,10 +34,10 @@ apis:
       Context Protocol.
 name: Grounded.tools
 tags:
-  - Experience
-  - Documentation
   - Developer Tools
   - Developers
+  - Documentation
+  - Experience
 type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
