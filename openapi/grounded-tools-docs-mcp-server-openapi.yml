@@ -26,7 +26,7 @@ paths:
   /sse:
     get:
       operationId: connectMcpSse
-      summary: Connect to MCP server via Server-Sent Events
+      summary: Grounded.tools Connect to MCP server via Server-Sent Events
       description: >-
         Establishes a Server-Sent Events (SSE) connection to the MCP server.
         This is the primary endpoint for MCP client connections. The server
@@ -45,7 +45,7 @@ paths:
   /mcp:
     post:
       operationId: sendMcpMessage
-      summary: Send MCP message via streamable HTTP
+      summary: Grounded.tools Send MCP message via streamable HTTP
       description: >-
         Send a JSON-RPC 2.0 message to the MCP server over streamable HTTP.
         This is an alternative transport to SSE for MCP client connections.
@@ -71,7 +71,7 @@ paths:
   /:
     get:
       operationId: getWebUi
-      summary: Web management UI
+      summary: Grounded.tools Web management UI
       description: >-
         Serves the web-based management UI for managing documentation sources,
         viewing indexed libraries, monitoring scraping jobs, and searching
