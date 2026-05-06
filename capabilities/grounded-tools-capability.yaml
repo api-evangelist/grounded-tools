@@ -1,0 +1,127 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: grounded.tools Docs MCP Server API
+  description: The grounded.tools Docs MCP Server is an open-source, privacy-first documentation indexing tool that keeps
+    AI assistants informed with up-to-date, version-specific documentation. It indexes documentation from websites, GitHub
+    repositories, npm, PyPI, and local files, then provides AI assistants with version-aware search capabilities via the Model
+    Context Protocol (MCP). The server exposes MCP tools over Server-Sent Events (SSE) and streamable HTTP, along with a web
+    management UI for documentation management. MCP tools include scrape_docs, search_docs, fetch_url, list_libraries, find_version,
+    l
+  tags:
+  - Grounded
+  - Tools
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: grounded-tools
+    baseUri: http://localhost:6280
+    description: grounded.tools Docs MCP Server API HTTP API.
+    resources:
+    - name: sse
+      path: /sse
+      operations:
+      - name: connectmcpsse
+        method: GET
+        description: Grounded.tools Connect to MCP server via Server-Sent Events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: mcp
+      path: /mcp
+      operations:
+      - name: sendmcpmessage
+        method: POST
+        description: Grounded.tools Send MCP message via streamable HTTP
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resource
+      path: /
+      operations:
+      - name: getwebui
+        method: GET
+        description: Grounded.tools Web management UI
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: grounded-tools-rest
+    description: REST adapter for grounded.tools Docs MCP Server API.
+    resources:
+    - path: /sse
+      name: connectmcpsse
+      operations:
+      - method: GET
+        name: connectmcpsse
+        description: Grounded.tools Connect to MCP server via Server-Sent Events
+        call: grounded-tools.connectmcpsse
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /mcp
+      name: sendmcpmessage
+      operations:
+      - method: POST
+        name: sendmcpmessage
+        description: Grounded.tools Send MCP message via streamable HTTP
+        call: grounded-tools.sendmcpmessage
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /
+      name: getwebui
+      operations:
+      - method: GET
+        name: getwebui
+        description: Grounded.tools Web management UI
+        call: grounded-tools.getwebui
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: grounded-tools-mcp
+    transport: http
+    description: MCP adapter for grounded.tools Docs MCP Server API for AI agent use.
+    tools:
+    - name: connectmcpsse
+      description: Grounded.tools Connect to MCP server via Server-Sent Events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: grounded-tools.connectmcpsse
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sendmcpmessage
+      description: Grounded.tools Send MCP message via streamable HTTP
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: grounded-tools.sendmcpmessage
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getwebui
+      description: Grounded.tools Web management UI
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: grounded-tools.getwebui
+      outputParameters:
+      - type: object
+        mapping: $.
