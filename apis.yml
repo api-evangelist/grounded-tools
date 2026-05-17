@@ -38,7 +38,7 @@ tags:
   - Developers
   - Documentation
   - Experience
-type: Contract
+kind: contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2026-01-02'
