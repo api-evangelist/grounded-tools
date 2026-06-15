@@ -1,0 +1,274 @@
+{
+  "item": [
+    {
+      "id": "f6bd802c-76b4-40e9-a2c7-9c8dfe807527",
+      "name": "MCP Transport",
+      "description": {
+        "content": "Model Context Protocol transport endpoints for connecting AI assistants. Supports SSE and streamable HTTP transports.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "71244aad-e6aa-4289-ac2a-f8be58d4cc32",
+          "name": "Grounded.tools Connect to MCP server via Server-Sent Events",
+          "request": {
+            "name": "Grounded.tools Connect to MCP server via Server-Sent Events",
+            "description": {
+              "content": "Establishes a Server-Sent Events (SSE) connection to the MCP server. This is the primary endpoint for MCP client connections. The server streams MCP protocol messages including tool results, resource data, and notifications over this persistent connection.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sse"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/event-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3fdf44d2-6be8-4f76-92c1-972c7af3afb6",
+              "name": "SSE stream established successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/event-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/event-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "641cd21e-3590-4af7-93e6-e2e869fadc63",
+          "name": "Grounded.tools Send MCP message via streamable HTTP",
+          "request": {
+            "name": "Grounded.tools Send MCP message via streamable HTTP",
+            "description": {
+              "content": "Send a JSON-RPC 2.0 message to the MCP server over streamable HTTP. This is an alternative transport to SSE for MCP client connections. Supports all MCP protocol operations including tool invocations (scrape_docs, search_docs, fetch_url, list_libraries, find_version, list_jobs, get_job_info, cancel_job, remove_docs, refresh_version) and resource access.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mcp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"<string>\",\n  \"method\": \"<string>\",\n  \"id\": \"<string>\",\n  \"params\": {\n    \"name\": \"<string>\",\n    \"arguments\": \"<object>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2c46726d-2f8a-4fa9-b3a6-bf83bd585034",
+              "name": "MCP response returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mcp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"<string>\",\n  \"method\": \"tools/call\",\n  \"id\": \"<string>\",\n  \"params\": {\n    \"name\": \"<string>\",\n    \"arguments\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"string\",\n  \"result\": {},\n  \"error\": {\n    \"code\": 5402,\n    \"message\": \"string\",\n    \"data\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "7682b469-be5c-464c-bd33-664d101d1c14",
+      "name": "Web UI",
+      "description": {
+        "content": "Web-based management interface for documentation sources, library browsing, job monitoring, and search.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b6c850c0-fbc3-48d3-91a0-286c7059c668",
+          "name": "Grounded.tools Web management UI",
+          "request": {
+            "name": "Grounded.tools Web management UI",
+            "description": {
+              "content": "Serves the web-based management UI for managing documentation sources, viewing indexed libraries, monitoring scraping jobs, and searching documentation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/html"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "facc5ed4-a865-4a81-bb4d-3f44737c443e",
+              "name": "HTML page for the web management UI.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:6280",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "662a531d-b9a7-4388-931c-d8f46eb86915",
+    "name": "grounded.tools Docs MCP Server API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The grounded.tools Docs MCP Server is an open-source, privacy-first documentation indexing tool that keeps AI assistants informed with up-to-date, version-specific documentation. It indexes documentation from websites, GitHub repositories, npm, PyPI, and local files, then provides AI assistants with version-aware search capabilities via the Model Context Protocol (MCP). The server exposes MCP tools over Server-Sent Events (SSE) and streamable HTTP, along with a web management UI for documentation management. MCP tools include scrape_docs, search_docs, fetch_url, list_libraries, find_version, list_jobs, get_job_info, cancel_job, remove_docs, and refresh_version.\n\nContact Support:\n Name: Andre Rabold",
+      "type": "text/plain"
+    }
+  }
+}

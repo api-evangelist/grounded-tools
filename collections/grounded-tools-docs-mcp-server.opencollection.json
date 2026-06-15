@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "grounded.tools Docs MCP Server API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MCP Transport",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Grounded.tools Connect to MCP server via Server-Sent Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:6280/sse"
+          },
+          "docs": "Establishes a Server-Sent Events (SSE) connection to the MCP server. This is the primary endpoint for MCP client connections. The server streams MCP protocol messages including tool results, resource data, and notifications over this persistent connection."
+        },
+        {
+          "info": {
+            "name": "Grounded.tools Send MCP message via streamable HTTP",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:6280/mcp",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a JSON-RPC 2.0 message to the MCP server over streamable HTTP. This is an alternative transport to SSE for MCP client connections. Supports all MCP protocol operations including tool invocations (scrape_docs, search_docs, fetch_url, list_libraries, find_version, list_jobs, get_job_info, cancel_job, remove_docs, refresh_version) and resource access."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Web UI",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Grounded.tools Web management UI",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:6280/"
+          },
+          "docs": "Serves the web-based management UI for managing documentation sources, viewing indexed libraries, monitoring scraping jobs, and searching documentation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
