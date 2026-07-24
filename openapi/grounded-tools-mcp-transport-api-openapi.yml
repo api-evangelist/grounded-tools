@@ -1,0 +1,118 @@
+openapi: 3.1.0
+info:
+  title: grounded.tools Docs MCP Server MCP Transport API
+  description: The grounded.tools Docs MCP Server is an open-source, privacy-first documentation indexing tool that keeps AI assistants informed with up-to-date, version-specific documentation. It indexes documentation from websites, GitHub repositories, npm, PyPI, and local files, then provides AI assistants with version-aware search capabilities via the Model Context Protocol (MCP). The server exposes MCP tools over Server-Sent Events (SSE) and streamable HTTP, along with a web management UI for documentation management. MCP tools include scrape_docs, search_docs, fetch_url, list_libraries, find_version, list_jobs, get_job_info, cancel_job, remove_docs, and refresh_version.
+  version: 0.1.0
+  contact:
+    name: Andre Rabold
+    url: https://github.com/arabold/docs-mcp-server
+  license:
+    name: MIT
+    url: https://github.com/arabold/docs-mcp-server/blob/main/LICENSE
+servers:
+- url: http://localhost:6280
+  description: Local development server (default port)
+tags:
+- name: MCP Transport
+  description: Model Context Protocol transport endpoints for connecting AI assistants. Supports SSE and streamable HTTP transports.
+paths:
+  /sse:
+    get:
+      operationId: connectMcpSse
+      summary: Grounded.tools Connect to MCP server via Server-Sent Events
+      description: Establishes a Server-Sent Events (SSE) connection to the MCP server. This is the primary endpoint for MCP client connections. The server streams MCP protocol messages including tool results, resource data, and notifications over this persistent connection.
+      tags:
+      - MCP Transport
+      responses:
+        '200':
+          description: SSE stream established successfully.
+          content:
+            text/event-stream:
+              schema:
+                type: string
+                description: Server-Sent Events stream carrying MCP protocol messages.
+  /mcp:
+    post:
+      operationId: sendMcpMessage
+      summary: Grounded.tools Send MCP message via streamable HTTP
+      description: Send a JSON-RPC 2.0 message to the MCP server over streamable HTTP. This is an alternative transport to SSE for MCP client connections. Supports all MCP protocol operations including tool invocations (scrape_docs, search_docs, fetch_url, list_libraries, find_version, list_jobs, get_job_info, cancel_job, remove_docs, refresh_version) and resource access.
+      tags:
+      - MCP Transport
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JsonRpcRequest'
+      responses:
+        '200':
+          description: MCP response returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonRpcResponse'
+components:
+  schemas:
+    JsonRpcResponse:
+      type: object
+      description: JSON-RPC 2.0 response message.
+      required:
+      - jsonrpc
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+        id:
+          oneOf:
+          - type: string
+          - type: integer
+          description: Matching request identifier.
+        result:
+          type: object
+          description: Successful result payload.
+        error:
+          type: object
+          description: Error details if the request failed.
+          properties:
+            code:
+              type: integer
+            message:
+              type: string
+            data:
+              type: object
+    JsonRpcRequest:
+      type: object
+      description: JSON-RPC 2.0 request message for MCP protocol communication.
+      required:
+      - jsonrpc
+      - method
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+          description: JSON-RPC protocol version.
+        id:
+          oneOf:
+          - type: string
+          - type: integer
+          description: Request identifier for matching responses.
+        method:
+          type: string
+          description: The MCP method to invoke. For tool calls use tools/call. For resource access use resources/read.
+          examples:
+          - tools/call
+          - tools/list
+          - resources/read
+          - resources/list
+        params:
+          type: object
+          description: Method-specific parameters.
+          properties:
+            name:
+              type: string
+              description: The tool name when method is tools/call. Available tools are scrape_docs, search_docs, fetch_url, list_libraries, find_version, list_jobs, get_job_info, cancel_job, remove_docs, and refresh_version.
+            arguments:
+              type: object
+              description: Tool-specific arguments.

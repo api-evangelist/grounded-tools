@@ -1,0 +1,32 @@
+openapi: 3.1.0
+info:
+  title: grounded.tools Docs MCP Server MCP Transport Web UI API
+  description: The grounded.tools Docs MCP Server is an open-source, privacy-first documentation indexing tool that keeps AI assistants informed with up-to-date, version-specific documentation. It indexes documentation from websites, GitHub repositories, npm, PyPI, and local files, then provides AI assistants with version-aware search capabilities via the Model Context Protocol (MCP). The server exposes MCP tools over Server-Sent Events (SSE) and streamable HTTP, along with a web management UI for documentation management. MCP tools include scrape_docs, search_docs, fetch_url, list_libraries, find_version, list_jobs, get_job_info, cancel_job, remove_docs, and refresh_version.
+  version: 0.1.0
+  contact:
+    name: Andre Rabold
+    url: https://github.com/arabold/docs-mcp-server
+  license:
+    name: MIT
+    url: https://github.com/arabold/docs-mcp-server/blob/main/LICENSE
+servers:
+- url: http://localhost:6280
+  description: Local development server (default port)
+tags:
+- name: Web UI
+  description: Web-based management interface for documentation sources, library browsing, job monitoring, and search.
+paths:
+  /:
+    get:
+      operationId: getWebUi
+      summary: Grounded.tools Web management UI
+      description: Serves the web-based management UI for managing documentation sources, viewing indexed libraries, monitoring scraping jobs, and searching documentation.
+      tags:
+      - Web UI
+      responses:
+        '200':
+          description: HTML page for the web management UI.
+          content:
+            text/html:
+              schema:
+                type: string
