@@ -1,34 +1,55 @@
 aid: grounded-tools
 url: https://raw.githubusercontent.com/api-evangelist/grounded-tools/refs/heads/main/apis.yml
 apis:
-  - aid: grounded-tools:grounded-tools
-    name: Grounded.tools
-    tags:
-      - Developer Tools
-      - Developers
-      - Documentation
-      - Experience
-    humanURL: ' https://grounded.tools/'
-    properties:
-      - url: ' https://grounded.tools/'
-        type: Documentation
-      - url: https://github.com/arabold/docs-mcp-server
-        type: GitHubRepository
-      - url: openapi/grounded-tools-docs-mcp-server-openapi.yml
-        type: OpenAPI
-      - url: json-schema/library.json
-        type: JSONSchema
-      - url: json-schema/version.json
-        type: JSONSchema
-      - url: json-schema/job.json
-        type: JSONSchema
-      - url: json-schema/search-result.json
-        type: JSONSchema
-      - url: json-ld/grounded-tools-context.jsonld
-        type: JSONLD
-    description: >-
-      Index 3rd party documentation from websites, GitHub, npm, PyPI, and local files. Provide your AI with
-      version-aware search tools via the Model Context Protocol.
+- aid: grounded-tools:grounded-tools-mcp-transport-api
+  name: Grounded.tools MCP Transport API
+  description: >-
+    Model Context Protocol transport endpoints for connecting AI assistants. Supports SSE and streamable
+    HTTP transports.
+  humanURL: ' https://grounded.tools/'
+  tags:
+  - MCP Transport
+  properties:
+  - type: OpenAPI
+    url: openapi/grounded-tools-mcp-transport-api-openapi.yml
+  - type: Documentation
+    url: ' https://grounded.tools/'
+  - type: GitHubRepository
+    url: https://github.com/arabold/docs-mcp-server
+  - type: JSONSchema
+    url: json-schema/library.json
+  - type: JSONSchema
+    url: json-schema/version.json
+  - type: JSONSchema
+    url: json-schema/job.json
+  - type: JSONSchema
+    url: json-schema/search-result.json
+  - type: JSONLD
+    url: json-ld/grounded-tools-context.jsonld
+- aid: grounded-tools:grounded-tools-web-ui-api
+  name: Grounded.tools Web UI API
+  description: >-
+    Web-based management interface for documentation sources, library browsing, job monitoring, and search.
+  humanURL: ' https://grounded.tools/'
+  tags:
+  - Web UI
+  properties:
+  - type: OpenAPI
+    url: openapi/grounded-tools-web-ui-api-openapi.yml
+  - type: Documentation
+    url: ' https://grounded.tools/'
+  - type: GitHubRepository
+    url: https://github.com/arabold/docs-mcp-server
+  - type: JSONSchema
+    url: json-schema/library.json
+  - type: JSONSchema
+    url: json-schema/version.json
+  - type: JSONSchema
+    url: json-schema/job.json
+  - type: JSONSchema
+    url: json-schema/search-result.json
+  - type: JSONLD
+    url: json-ld/grounded-tools-context.jsonld
 name: Grounded.tools
 tags:
   - Developer Tools
@@ -36,7 +57,19 @@ tags:
   - Documentation
   - Experience
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/grounded-tools.png
 access: 3rd-Party
 created: '2026-01-02'
 modified: '2026-05-19'
