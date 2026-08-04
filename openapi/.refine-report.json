@@ -1,0 +1,16 @@
+{
+  "provider": "grounded-tools",
+  "sources": [
+    "grounded-tools-mcp-transport-api-openapi.yml",
+    "grounded-tools-web-ui-api-openapi.yml"
+  ],
+  "outputs": [
+    "grounded-tools-mcp-transport-api-openapi.yml",
+    "grounded-tools-web-ui-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
