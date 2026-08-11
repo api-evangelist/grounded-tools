@@ -12,8 +12,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/grounded-tools-mcp-transport-api-openapi.yml
-  - type: Documentation
-    url: ' https://grounded.tools/'
   - type: GitHubRepository
     url: https://github.com/arabold/docs-mcp-server
   - type: JSONSchema
@@ -36,8 +34,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/grounded-tools-web-ui-api-openapi.yml
-  - type: Documentation
-    url: ' https://grounded.tools/'
   - type: GitHubRepository
     url: https://github.com/arabold/docs-mcp-server
   - type: JSONSchema
@@ -82,6 +78,15 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.19'
 common:
+  - type: IssueTracker
+    url: https://github.com/arabold/docs-mcp-server/issues
+  - type: Releases
+    url: https://github.com/arabold/docs-mcp-server/releases
+  - type: ContributionGuide
+    url: https://github.com/arabold/docs-mcp-server/blob/main/CONTRIBUTING.md
+  - type: License
+    name: MIT
+    url: https://github.com/arabold/docs-mcp-server/blob/main/LICENSE
   - type: AgenticAccess
     url: agentic-access/grounded-tools-agentic-access.yml
   - type: DomainSecurity
