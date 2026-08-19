@@ -1,0 +1,102 @@
+{
+  "item": [
+    {
+      "id": "5539623b-e6c8-4cdc-9ad5-3e0cfe8ac53b",
+      "name": "Web UI",
+      "description": {
+        "content": "Web-based management interface for documentation sources, library browsing, job monitoring, and search.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4c2a155a-3946-4d8d-8d16-e9739da1e790",
+          "name": "Grounded.tools Web management UI",
+          "request": {
+            "name": "Grounded.tools Web management UI",
+            "description": {
+              "content": "Serves the web-based management UI for managing documentation sources, viewing indexed libraries, monitoring scraping jobs, and searching documentation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/html"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ad7a0edd-e1eb-4ea9-a7b0-12e5711c0c8a",
+              "name": "HTML page for the web management UI.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:6280",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "15258d20-386c-4d6c-8811-ea17a440f1e9",
+    "name": "grounded.tools Docs MCP Server MCP Transport Web UI API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The grounded.tools Docs MCP Server is an open-source, privacy-first documentation indexing tool that keeps AI assistants informed with up-to-date, version-specific documentation. It indexes documentation from websites, GitHub repositories, npm, PyPI, and local files, then provides AI assistants with version-aware search capabilities via the Model Context Protocol (MCP). The server exposes MCP tools over Server-Sent Events (SSE) and streamable HTTP, along with a web management UI for documentation management. MCP tools include scrape_docs, search_docs, fetch_url, list_libraries, find_version, list_jobs, get_job_info, cancel_job, remove_docs, and refresh_version.\n\nContact Support:\n Name: Andre Rabold",
+      "type": "text/plain"
+    }
+  }
+}

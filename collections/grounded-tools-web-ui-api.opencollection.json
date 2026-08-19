@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "grounded.tools Docs MCP Server MCP Transport Web UI API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Web UI",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Grounded.tools Web management UI",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:6280/"
+          },
+          "docs": "Serves the web-based management UI for managing documentation sources, viewing indexed libraries, monitoring scraping jobs, and searching documentation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
