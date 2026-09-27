@@ -6,7 +6,7 @@ apis:
   description: >-
     Model Context Protocol transport endpoints for connecting AI assistants. Supports SSE and streamable
     HTTP transports.
-  humanURL: ' https://grounded.tools/'
+  humanURL: https://grounded.tools/
   tags:
   - MCP Transport
   properties:
@@ -28,7 +28,7 @@ apis:
   name: Grounded.tools Web UI API
   description: >-
     Web-based management interface for documentation sources, library browsing, job monitoring, and search.
-  humanURL: ' https://grounded.tools/'
+  humanURL: https://grounded.tools/
   tags:
   - Web UI
   properties:
