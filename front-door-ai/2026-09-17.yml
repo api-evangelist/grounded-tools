@@ -1,0 +1,29 @@
+# Front Door AI Index — grounded-tools — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: grounded-tools
+  lexicon_version: '1.0'
+  probed_at: '2026-09-25'
+  host: grounded.tools
+  final_host: grounded.tools
+  ownership: own
+  owner: grounded-tools
+  shares_host_with: null
+  inherited_from: null
+  alias_of: null
+  verdict: scored
+  score: 3
+  band: 3
+  band_label: light
+  host_score: 3
+  density: 69.77
+  words: 43
+  tiers:
+    agentic: 1
+    core: 2
+    model: 0
+  ambiguous: 0
+  top_terms:
+    AI: 2
+    MCP: 1
