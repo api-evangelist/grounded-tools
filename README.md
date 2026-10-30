@@ -1,4 +1,4 @@
-# Grounded.tools (grounded-tools)
+# Grounded.tools
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,59 +66,135 @@
 
 Grounded.tools (Grounded Docs MCP Server) is an open-source, privacy-first documentation indexing tool that keeps AI assistants informed with up-to-date, version-specific documentation from multiple sources.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/grounded-tools/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/grounded-tools/refs/heads/main/apis.yml)
+**Areas:** Developer Tools · Developers · Documentation · Experience
 
-## Scope
+## Grounded.tools on APIs.io
 
-- **Position:** Consuming
-- **Access:** 3rd-Party
+Everything profiled for Grounded.tools is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/grounded-tools/](https://apis.io/providers/grounded-tools/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (2)
 
-- Developer Tools
-- Developers
-- Documentation
-- Experience
+- [Grounded.tools MCP Transport API](https://apis.io/apis/grounded-tools/grounded-tools-mcp-transport-api/) — Model Context Protocol transport endpoints for connecting AI assistants. Supports SSE and streamable HTTP transports.
+- [Grounded.tools Web UI API](https://apis.io/apis/grounded-tools/grounded-tools-web-ui-api/) — Web-based management interface for documentation sources, library browsing, job monitoring, and search.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-01-02
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Grounded.tools
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Index 3rd party documentation from websites, GitHub, npm, PyPI, and local files. Provide your AI with version-aware search tools via the Model Context Protocol.
+- [Grounded Tools Agentic Access](https://apis.io/agentic-access/grounded-tools/grounded-tools-agentic-access/)
 
-- **Human URL:** [ https://grounded.tools/]( https://grounded.tools/)
+#### JSON Schema (4)
 
-#### Tags
+The data models the API reads and writes.
 
-- Developer Tools
-- Developers
-- Documentation
-- Experience
+- [grounded.tools Job](https://apis.io/schemas/grounded-tools/job/)
+- [grounded.tools Library](https://apis.io/schemas/grounded-tools/library/)
+- [grounded.tools Search Result](https://apis.io/schemas/grounded-tools/search-result/)
+- [grounded.tools Version](https://apis.io/schemas/grounded-tools/version/)
 
-#### Properties
+#### JSON-LD (1)
 
-- [Documentation]( https://grounded.tools/)
-- [GitHub Repository](https://github.com/arabold/docs-mcp-server)
-- [OpenAPI](openapi/grounded-tools-docs-mcp-server-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/grounded-tools-docs-mcp-server.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/grounded-tools-docs-mcp-server.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/library.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/version.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/job.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/search-result.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/grounded-tools-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+Linked-data contexts for the provider's vocabulary.
 
-## Common Properties
+- [Grounded Tools Context](https://apis.io/jsonld/grounded-tools/grounded-tools-context/)
+
+#### Collections (3)
+
+Postman and Open Collection request collections.
+
+- [grounded.tools Docs MCP Server API](https://apis.io/collections/grounded-tools/open-grounded-tools-docs-mcp-server/)
+- [grounded.tools Docs MCP Server MCP Transport API](https://apis.io/collections/grounded-tools/open-grounded-tools-mcp-transport-api/)
+- [grounded.tools Docs MCP Server MCP Transport Web UI API](https://apis.io/collections/grounded-tools/open-grounded-tools-web-ui-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Grounded.tools — jsonschema rules](https://apis.io/rules/grounded-tools/grounded-tools-jsonschema-spectral-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Grounded Tools Domain Security](https://apis.io/security/grounded-tools/grounded-tools-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Grounded Tools Plans Pricing](https://apis.io/plans/grounded-tools/grounded-tools-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Grounded Tools Rate Limits](https://apis.io/rate-limits/grounded-tools/grounded-tools-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Grounded Tools Finops](https://apis.io/finops/grounded-tools/grounded-tools-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://grounded.tools/)
-- [Features](https://grounded.tools/#features)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 24.9** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 48.2 |
+| Contract quality | 49.3 |
+| Contract governance | 9.8 |
+| Operational transparency | 28.9 |
+| Developer ergonomics | 0.0 |
+| Access clarity | 7.9 |
+
+**Agent readiness 15.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/grounded-tools/](https://apis.io/providers/grounded-tools/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Grounded.tools: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/grounded-tools/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
